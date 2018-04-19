@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6" style="text-align: left">
+            <h1>Post Details</h1>
+        </div>
+        <br>
+        <div class="col-lg-6" style="text-align: right">
+            <form style="text-align: right" action="/">
+                <input class="btn btn-default" type="submit" value="Go back to search"/>
+            </form>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <a id="before_btn" href="/{{ before_id }}" class="btn"><span class="fa fa-arrow-left fa-3x"></span></a>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <a id="after_btn" href="/{{ after_id }}" class="btn"><span class="fa fa-arrow-right fa-3x"></span></a>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-5">
+            <img id="post_image" class="img-center center-block" src="{{ post._imageUrl }}" width="300">
+            <br>
+            {{ post._message }}
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div id="feeds" class="col-lg-8" style="text-align: right">
+                    <div class="col-lg-4" style="text-align: center"><i id="likes" class="fa fa-heart fa-lg"
+                                                                        aria-hidden="true"> {{ post._likes }}</i></div>
+                    <div class="col-lg-4" style="text-align: center"><i id="shares" class="fa fa fa-share fa-lg"
+                                                                        aria-hidden="true"> {{ post._shares }}</i></div>
+                    <div class="col-lg-4" style="text-align: center"><i id="comments" class="fa fa-comment fa-lg"
+                                                                        aria-hidden="true"> {{ post._comments }}</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <table class="table table-user-information">
+                <tbody>
+                <tr>
+                    <td>Post ID:</td>
+                    <td>{{ post._post_id }}</td>
+                </tr>
+                <tr>
+                    <td>Platform:</td>
+                    <td>{{ post._platform }}</td>
+                </tr>
+                <tr>
+                    <td>Handle:</td>
+                    <td>{{ post._handle }}</td>
+                </tr>
+                <tr>
+                    <td>Post Date:</td>
+                    <td>{{ post._postDate }}</td>
+                </tr>
+                <tr>
+                    <td>Post Type:</td>
+                    <td>{{ post._postType }}</td>
+                </tr>
+                <tr>
+                    <td>Post URL:</td>
+                    <td><a href="{{ post._postUrl }}">link.</a></td>
+                </tr>
+                <tr>
+                    <td>Campaign:</td>
+                    <td><a href="{{ post._project_url}}">{{ post._campaign_name }}</a></td>
+                </tr>
+                <tr>
+                    <td>Campaign Goal:</td>
+                    <td>{{ post._project_goal }} {{ post._project_currency }}</td>
+                </tr>
+                <tr>
+                    <td>Campaign Category:</td>
+                    <td>{{ post._sub_category }}</td>
+                </tr>
+                <tr>
+                    <td>Pledge Amount:</td>
+                    <td>{{ post._project_pledgeAmount }} {{ post._project_currency }}</td>
+                </tr>
+                <tr>
+                    <td>Amount of Backers:</td>
+                    <td>{{ post._project_backerCount }} backers</td>
+                </tr>
+                <tr>
+                    <td>Succeeded:</td>
+                    <td id="succeeded">{{ post._succeeded }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+</div>
+
+<script src="/js/post.js"></script>
+
+</body>
+</html>

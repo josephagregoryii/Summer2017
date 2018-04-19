@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StoryBlaster's Post Organization Tool</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <style>
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+</style>
+</head>
+<body>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+</script>
+<div class="container">
+    <div class="row">
+        <h1>StoryBlaster's Post Organization Tool</h1>
+        <hr>
+        <form id="search_form" action="/page/1" class="form-inline" style="text-align: left">
+            <div class="form-group">
+                <label for="postType">Post Type </label>
+                <select id="postType" name="postType" class="form-control">
+                    <option selected="selected" value="">(any)</option>
+                    <option value="10">Text</option>
+                    <option value="video">Video</option>
+                    <option value="image">Image</option>
+                    <option value="fb link">Fb link</option>
+                    <option value="audio">Audio</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="platform">Platform </label>
+                <select id="platform" name="platform" class="form-control">
+                    <option selected="selected" value="">(any)</option>
+                    <option value="twitter">Twitter</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="instagram">Instagram</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="succeeded">Succeeded </label>
+                <select id="succeeded" name="succeeded" class="form-control">
+                    <option selected="selected" value="2">(any)</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="intent">Intent </label>
+                <select id="intent" name="intent" class="form-control">
+                    <option selected="selected" value="5">(any)</option>
+                    <option value="1">Identity (1)</option>
+                    <option value="2">Build community (2)</option>
+                    <option value="3">Outreach (3)</option>
+                    <option value="4">Sell (4)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category </label>
+                <select id="category" name="category" class="form-control">
+                    <option selected="selected" value="">(any)</option>
+                    <option value="Art">Art</option>
+                    <option value="Comics">Comics</option>
+                    <option value="Crafts">Crafts</option>
+                    <option value="Dance">Dance</option>
+                    <option value="Design">Design</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Film & Video">Film & Video</option>
+                    <option value="Food">Food</option>
+                    <option value="Games">Games</option>
+                    <option value="Journalism">Journalism</option>
+                    <option value="Music">Music</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Pubishing">Pubishing</option>
+                    <option value="Technology">Technology</option>
+                    <option value="15">Theater</option>
+                </select>
+            </div>
+
+            <button onclick="searchDisappear()" type="search" class="btn btn-default">Search</button>
+            <script>
+                function searchDisappear() {
+                    document.getElementById("search_form").style.visibility = "hidden";
+                }
+
+
+            </script>
+        </form>
+        <form style="text-align: right" action="/">
+            <input class="btn btn-default" type="submit" value="Clear Search"/>
+        </form>
+        <div id="CourseChart">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        Result Count
+                    </th>
+                    <th>
+                        Post ID
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Source
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                    <th>
+                        Likes
+                    </th>
+                    <th>
+                        Shares
+                    </th>
+                    <th>
+                        Comments
+                    </th>
+                    <th>
+                        Succeeded
+                    </th>
+                    <th>
+                        URL
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in result_list %}
+                <tr>
+                    <td>
+                        <a href="/{{ post._post_id }}">{{ post._post_id }}</a></td>
+                    <td>
+                        <img src="{{ post._imageUrl }}" width="140">
+                    </td>
+                    <td>{{ post._platform }}</td>
+                    <td>{{ post._gen_postType }}</td>
+                    <td>{{ post._message }}</td>
+                    <td>{{ post._likes }}</td>
+                    <td>{{ post._shares }}</td>
+                    <td>{{ post._comments }}</td>
+                    <td class="succeeded">{{ post._succeeded }}</td>
+                    <td>{{ post._platform }}</td>
+                    <td>{{ post._gen_postType }}</td>
+                    <td>{{ post._message }}</td>
+                    <td>{{ post._likes }}</td>
+                    <td>{{ post._shares }}</td>
+                    <td>{{ post._comments }}</td>
+                    <td><a class="btn btn-sm btn-default" href="{{ post._postUrl }}">link</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <p style="text-align: center" class="pagination-here"></p>
+    <br>
+    <hr>
+    <br>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.bootpag.min.js"></script>
+    <script>
+        $('.pagination-here').bootpag({
+        total: {{ total_pages }},
+        page: {{page_num}},
+        maxVisible: 10,
+        href: "#/page/{{number}}",
+        leaps: false,
+        }).on('page', function(event, num){
+        window.location = "/page/" + num});
+    </script
+    <script src="/js/main.js"></script>
+</div>
+</body>
+</html>
